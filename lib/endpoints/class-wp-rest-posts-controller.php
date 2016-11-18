@@ -138,7 +138,7 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 			'search'         => 's',
 			'slug'           => 'name',
 			'status'         => 'post_status',
-            'by'             => 'author__in',
+			'by'             => 'author__in',
 		);
 
 		// For each known parameter which is both registered and present in the request,
@@ -1812,18 +1812,18 @@ class WP_REST_Posts_Controller extends WP_REST_Controller {
 			'validate_callback'  => 'rest_validate_request_arg',
 		);
 		if ( post_type_supports( $this->post_type, 'author' ) ) {
-            $params['author'] = array(
-                'description'         => __( 'Limit result set to posts assigned to specific authors.' ),
-                'type'                => 'array',
-                'default'             => array(),
-                'sanitize_callback'   => 'wp_parse_id_list',
-            );
-            $params['by'] = array(
-                'description'         => __( 'Limit result set to posts assigned to specific authors.' ),
-                'type'                => 'array',
-                'default'             => array(),
-                'sanitize_callback'   => 'wp_parse_id_list',
-            );
+			$params['author'] = array(
+				'description'         => __( 'Limit result set to posts assigned to specific authors.' ),
+				'type'                => 'array',
+				'default'             => array(),
+				'sanitize_callback'   => 'wp_parse_id_list',
+			);
+			$params['by'] = array(
+				'description'         => __( 'Limit result set to posts assigned to specific authors.' ),
+				'type'                => 'array',
+				'default'             => array(),
+				'sanitize_callback'   => 'wp_parse_id_list',
+			);
 			$params['author_exclude'] = array(
 				'description'         => __( 'Ensure result set excludes posts assigned to specific authors.' ),
 				'type'                => 'array',
