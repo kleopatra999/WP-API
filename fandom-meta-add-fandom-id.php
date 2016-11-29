@@ -6,7 +6,7 @@ add_action( 'rest_api_init', 'slug_register_fandom_id' );
 
 function slug_register_fandom_id() {
 	register_rest_field( 'post',
-		'fandom_id',
+		'upstream_fandom_user_id',
 		array(
 			'get_callback'    => 'slug_get_fandom_id',
 			'update_callback' => 'slug_update_fandom_id',
