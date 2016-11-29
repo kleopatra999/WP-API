@@ -1,13 +1,19 @@
 <?php
 /**
- * Plugin Name: WP REST API
+ * Plugin Name: WP REST API (Fandom Version)
  * Description: JSON-based REST API for WordPress, originally developed as part of GSoC 2013.
- * Author: WP REST API Team
- * Author URI: http://v2.wp-api.org
- * Version: 2.0-beta15
- * Plugin URI: https://github.com/WP-API/WP-API
+ * Author: WP REST API Team / Fandom Team
+ * Version: 2.0-beta15-fandom1
+ * Plugin URI: https://github.com/Wikia/WP-API
  * License: GPL2+
  */
+ add_filter( 'site_transient_update_plugins', 'remove_update_notifications' );
+ function remove_update_notifications($value) {
+     if ( isset( $value ) && is_object( $value ) ) {
+         unset( $value->response[ plugin_basename(__FILE__) ] );
+     }
+     return $value;
+ }
 
 /**
  * WP_REST_Controller class.
@@ -126,6 +132,7 @@ if ( ! class_exists( 'WP_REST_User_Meta_Fields' ) ) {
  */
 include_once( dirname( __FILE__ ) . '/extras.php' );
 require_once( dirname( __FILE__ ) . '/core-integration.php' );
+require_once( dirname( __FILE__ ) . '/fandom-meta-add-fandom-id.php');
 
 add_filter( 'init', '_add_extra_api_post_type_arguments', 11 );
 add_action( 'init', '_add_extra_api_taxonomy_arguments', 11 );
