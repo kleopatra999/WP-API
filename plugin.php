@@ -11,10 +11,10 @@
 // disable update notifications
 add_filter( 'site_transient_update_plugins', 'remove_update_notifications' );
 function remove_update_notifications($value) {
-    if ( isset( $value ) && is_object( $value ) ) {
-       unset( $value->response[ plugin_basename(__FILE__) ] );
-   }
-   return $value;
+	if ( isset( $value ) && is_object( $value ) ) {
+		unset( $value->response[ plugin_basename(__FILE__) ] );
+	}
+	return $value;
 }
 
 /**
