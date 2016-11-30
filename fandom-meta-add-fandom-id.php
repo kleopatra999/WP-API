@@ -1,15 +1,15 @@
 <?php
 /**
- * Add the field "fandom_id" to REST API responses for posts read and write
+ * Add the field "upstream_fandom_user_id" to REST API responses for posts read and write
  */
-add_action( 'rest_api_init', 'slug_register_fandom_id' );
+add_action( 'rest_api_init', 'slug_register_upstream_fandom_user_id' );
 
-function slug_register_fandom_id() {
+function slug_register_upstream_fandom_user_id() {
 	register_rest_field( 'post',
 		'upstream_fandom_user_id',
 		array(
-			'get_callback'    => 'slug_get_fandom_id',
-			'update_callback' => 'slug_update_fandom_id',
+			'get_callback'    => 'slug_get_upstream_fandom_user_id',
+			'update_callback' => 'slug_update_upstream_fandom_user_id',
 			'schema'          => null,
 		)
 	);
@@ -24,7 +24,7 @@ function slug_register_fandom_id() {
  *
  * @return mixed
  */
-function slug_get_fandom_id( $object, $field_name, $request ) {
+function slug_get_upstream_fandom_user_id( $object, $field_name, $request ) {
 	return get_post_meta( $object[ 'id' ], $field_name, true );
 }
 
@@ -37,8 +37,8 @@ function slug_get_fandom_id( $object, $field_name, $request ) {
  *
  * @return bool|int
  */
-function slug_update_fandom_id( $value, $object, $field_name ) {
-	$new_value = (!empty( $value ) && is_numeric( $value )) ? intval( $value ) : '';
+function slug_update_upstream_fandom_user_id( $value, $object, $field_name ) {
+	$new_value = ( !empty( $value ) && is_numeric( $value ) ) ? intval( $value ) : '';
 
 	return update_post_meta( $object->ID, $field_name, $new_value );
 }
